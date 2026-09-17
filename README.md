@@ -14,6 +14,44 @@ Undiagnosed is not a diagnostic tool. It never states a diagnosis and never repl
 - [docs/DATA_MODEL.md](./docs/DATA_MODEL.md) — Supabase schema
 - [docs/AGENT_RULES.md](./docs/AGENT_RULES.md) — rules for any coding agent/LLM working on this repo
 - [docs/DEMO.md](./docs/DEMO.md) — golden path demo script and test checklist
+- [docs/backlog/](./docs/backlog/) — feature tickets F01–F13 with acceptance criteria
+
+## Getting started
+
+Needs Docker (for local Supabase) and an OpenAI API key.
+
+```bash
+cp .env.example .env     # add OPENAI_API_KEY
+npm install
+supabase start           # applies migrations and seeds the demo persona
+npm run embed -- --fixtures   # or --file <spreadsheet> once real data lands
+npm run dev
+```
+
+## Commands
+
+| Command | What it does |
+|---|---|
+| `npm run dev` | Next.js app on :3000 (`/`, `/results`, `/report`) |
+| `npm test` | Full suite — pattern, safety, extraction, retrieval edge cases, golden path |
+| `npm run eval` | Retrieval eval: precision@3 / @5 over 24 held-out queries |
+| `npm run trace -- "<text>"` | Full retrieval trace for one query |
+| `npm run embed -- --file <path>` | Load a CSV/JSON spreadsheet and embed it |
+| `npm run typecheck` | `tsc --noEmit` |
+
+`?debug=1` on `/results` shows the retrieval trace in the browser.
+
+## Where the placeholders are
+
+Copy that the content lead owns is marked in source with `PLACEHOLDER COPY`.
+List every instance with:
+
+```bash
+grep -rn "PLACEHOLDER COPY" src/
+```
+
+Placeholder remedy content lives entirely in [src/fixtures/](./src/fixtures/) and is
+imported only by tests, the eval harness and the fixture embedder — never by product code.
 
 ## Today's Task Split
 
