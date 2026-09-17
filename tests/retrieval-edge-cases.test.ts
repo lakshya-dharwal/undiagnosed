@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { cachedEmbedQuery, embeddedFixtures, fixtureStore } from '../src/fixtures/embedded-corpus.js';
+import { EDGE_TEST_QUERIES } from '../src/fixtures/test-queries.js';
 import { extract } from '../src/lib/extraction.js';
 import {
   PRIMARY_TAG_WEIGHT,
@@ -50,7 +51,7 @@ describe('edge case: query mentions multiple symptoms', () => {
 describe('edge case: symptom has no tagged remedies', () => {
   it('returns a graceful empty state, not unrelated results', async () => {
     const outcome = await retrieveRemedies({
-      query: 'my ears have been ringing constantly',
+      query: EDGE_TEST_QUERIES.tinnitus,
       tags: ['tinnitus'],
       store: fixtureStore(),
       embedQuery: embed,
@@ -88,7 +89,7 @@ describe('edge case: phrasing matches no tag vocabulary', () => {
 describe('edge case: tag filter returns fewer than topK', () => {
   it('returns the smaller set instead of loosening the filter', async () => {
     const outcome = await retrieveRemedies({
-      query: 'painful sex',
+      query: EDGE_TEST_QUERIES.painfulSex,
       tags: ['painful_sex'],
       store: fixtureStore(),
       embedQuery: embed,
@@ -105,7 +106,7 @@ describe('edge case: tag filter returns fewer than topK', () => {
 
   it('reports ok when the filter can fill every slot', async () => {
     const outcome = await retrieveRemedies({
-      query: 'pelvic pain',
+      query: EDGE_TEST_QUERIES.pelvicPain,
       tags: ['pelvic_pain'],
       store: fixtureStore(),
       embedQuery: embed,
@@ -133,7 +134,7 @@ describe('edge case: near-identical similarity scores', () => {
     }));
 
     const outcome = await retrieveRemedies({
-      query: 'cramps',
+      query: EDGE_TEST_QUERIES.cramps,
       tags: ['pelvic_pain'],
       store: new InMemoryRemedyStore(tied),
       embedQuery: embed,
@@ -161,7 +162,7 @@ describe('edge case: near-identical similarity scores', () => {
     }));
 
     const outcome = await retrieveRemedies({
-      query: 'cramps',
+      query: EDGE_TEST_QUERIES.cramps,
       tags: ['pelvic_pain'],
       store: new InMemoryRemedyStore(tied),
       embedQuery: embed,
@@ -195,7 +196,7 @@ describe('trace completeness', () => {
   });
 
   it('lists candidates in the same order as the returned remedies', async () => {
-    const outcome = await retrieveFromText('period pain is killing me', fixtureStore(), embed);
+    const outcome = await retrieveFromText(EDGE_TEST_QUERIES.periodPainShort, fixtureStore(), embed);
 
     expect(outcome.trace.candidates.slice(0, outcome.remedies.length).map((c) => c.name)).toEqual(
       outcome.remedies.map((remedy) => remedy.name),
