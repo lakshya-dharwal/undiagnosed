@@ -8,12 +8,12 @@ Undiagnosed is not a diagnostic tool. It never states a diagnosis and never repl
 
 ## Docs
 
-- [PRODUCT.md](./PRODUCT.md) — what this is, the three product components, the golden path
-- [ARCHITECTURE.md](./ARCHITECTURE.md) — system architecture, database, retrieval, pattern detection
-- [MEDICAL_SAFETY.md](./MEDICAL_SAFETY.md) — non-negotiable safety rules
-- [DATA_MODEL.md](./DATA_MODEL.md) — Supabase schema
-- [AGENT_RULES.md](./AGENT_RULES.md) — rules for any coding agent/LLM working on this repo
-- [DEMO.md](./DEMO.md) — golden path demo script and test checklist
+- [docs/PRODUCT.md](./docs/PRODUCT.md) — what this is, the three product components, the golden path
+- [docs/ARCHITECTURE.md](./docs/ARCHITECTURE.md) — system architecture, database, retrieval, pattern detection
+- [docs/MEDICAL_SAFETY.md](./docs/MEDICAL_SAFETY.md) — non-negotiable safety rules
+- [docs/DATA_MODEL.md](./docs/DATA_MODEL.md) — Supabase schema
+- [docs/AGENT_RULES.md](./docs/AGENT_RULES.md) — rules for any coding agent/LLM working on this repo
+- [docs/DEMO.md](./docs/DEMO.md) — golden path demo script and test checklist
 
 ## Today's Task Split
 
